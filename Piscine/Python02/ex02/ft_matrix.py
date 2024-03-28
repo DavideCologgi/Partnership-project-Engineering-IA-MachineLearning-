@@ -1,28 +1,50 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    ft_matrix.py                                       :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: dcologgi <dcologgi@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/12/13 14:31:14 by dcologgi          #+#    #+#              #
+#    Updated: 2023/12/13 15:19:29 by dcologgi         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 import sys
-argc = len(sys.argv)
-if argc < 3:
-	print("Error! Usage: python3 ft_matrix.py <n> <m>")
-else:
-	matrix = [[0] * int(sys.argv[2]) for _ in range(int(sys.argv[1]))]
-	for y in range(0, int(sys.argv[1])):
-		for x in range(0, int(sys.argv[2])):
-			matrix[y][x] = float(input("Insert the element in position (" + str(y) + ", " + str(x) + "): "))
+
+try:
+	if (len(sys.argv) != 3):
+		raise Exception("Error! Usage: python3 ft_matrix.py <n> <m>")
+	n = int(sys.argv[1])
+	m = int(sys.argv[2])
+	matrix = []
+	
+	# Filling matrix through input
+	for i in range(n):
+		row = []
+		for j in range(m):
+			value = float(input(f"Insert the element in position ({i}, {j}): "))
+			row.append(value)
+		matrix.append(row)
+	
+	# Print matrix
 	print("The inserted matrix is:")
-	for y in range(0, int(sys.argv[1])):
-		print(matrix[y])
-	print("The sum over rows is:")
-	sumList = []
-	for y in range(0, int(sys.argv[1])):
-		sum = 0
-		for x in range(0, int(sys.argv[2])):
-			sum += float(matrix[y][x])
-		sumList.append(sum)
-	print(sumList)
-	print("The sum over columns is:")
-	sumList = []
-	for x in range(0, int(sys.argv[2])):
-		sum = 0
-		for y in range(0, int(sys.argv[1])):
-			sum += float(matrix[y][x])
-		sumList.append(sum)
-	print(sumList)
+	for i in range(n):
+		print(matrix[i])
+	
+	# Sum of rows
+	sum = [0] * n
+	for y in range(m):
+		for x in range(n):
+			sum[x] += matrix[x][y]
+	print(f"The sum over rows is:\n{sum}")
+	
+	# Sum of columns
+	sum = [0] * m
+	for x in range(n):
+		for y in range(m):
+			sum[y] += matrix[x][y]
+	print(f"The sum over columns is:\n{sum}")
+
+except Exception as err:
+	print(err)

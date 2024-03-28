@@ -1,33 +1,45 @@
-class Person:
-	def __init__(self, name, last_name):
-		self.name = name
-		self.last_name = last_name
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    student.py                                         :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: dcologgi <dcologgi@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/12/14 12:29:06 by dcologgi          #+#    #+#              #
+#    Updated: 2023/12/14 14:31:34 by dcologgi         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
+class Person:
+	def __init__(self, fname, lname):
+		self.firstname = fname
+		self.lastname = lname
+	
 	def __str__(self):
-		return f"{self.name} {self.last_name}"
+		return (f"{self.firstname} {self.lastname}")
+		
 
 class Student(Person):
-	def __init__(self, name, last_name, degree=None):
-		super().__init__(name, last_name)
-		self.degree = degree
+	def __init__(self, fname, lname, course = None):
+		Person.__init__(self, fname, lname)
+		self.course = course
 
 	def __str__(self):
-		if (self.degree == None):
-			return f"{super().__str__()} is not registered to any course"
-		return f"{super().__str__()} is registered to {self.degree}"
-
-
-def main():
-	name = input("Insert first name: ")
-	last_name = input("Insert last name: ")
-	answer = input("Are you a student? (y/n)")
-	while answer != "y" and answer != "n":
-		answer = input("Please type \"y\" or \"n\": ")
-	if answer == "y":
-		degree = input("Please insert your degree course: ")
-		print(Student(name, last_name, degree))
-	else:
-		print(Person(name, last_name))
+		if (self.course == None):
+			return (f"{self.firstname} {self.lastname} is not registered to any course")
+		else:
+			return (f"{self.firstname} {self.lastname} is registered to {self.course}")
 
 if __name__ == "__main__":
-	main()
+	f_name = input("Insert first name: ")
+	l_name = input("Insert last name: ")
+	student = input("Are you a student? (y/n)")
+	while (student != 'y' and student != 'n'):
+		student = input('Please type "y" or "n": ')
+	if (student == 'y'):
+		course = input("Please insert your degree course: ")
+		s = Student(f_name, l_name, course)
+		print(f"{s.firstname} {s.lastname} is registered to {s.course}")
+	else:
+		p = Person(f_name, l_name)
+		print(f"{p.firstname} {p.lastname}")

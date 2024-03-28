@@ -1,18 +1,32 @@
-def trim(list):
-	list[:] = list[1:-1]
-	return None
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    ft_trim.py                                         :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: dcologgi <dcologgi@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/12/13 16:13:03 by dcologgi          #+#    #+#              #
+#    Updated: 2023/12/13 16:49:11 by dcologgi         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-def main():
-	import sys
-	argc = len(sys.argv)
-	if argc < 3:
-		print("Error! You must insert at least 2 values")
-	else:
-		trim_list = sys.argv[1:]
-		trim(trim_list)
-		print("The new list is:", trim_list)
+import sys
 
+def trim(lst = []):
+	if (len(lst) > 0):
+		lst.pop()
+		lst.pop(0)
+	return (None)
 
 if __name__ == "__main__":
-	main()
-
+	try:
+		if (len(sys.argv) < 3):
+			raise Exception("Error! You must insert at least 2 values")
+		lst = []
+		for i in sys.argv[1:]:
+			lst.append(i)
+		trim(lst)
+		print("The new list is:", lst)
+			
+	except Exception as err:
+		print(err)
